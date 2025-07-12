@@ -10,3 +10,13 @@ Features:
   3. You can see statistics in realtime.
   4. For example: You give it your document and say "Write names and test results to 2rows fom this docx file to excel file" or "<b>Login123</b> , <b>password456</b> login with these datas into my account and upload files".
   5. You can see infos and if work has done, it will send you notification or error report (when error occured).
+
+MVP has:
+  1. Free VPS service in <b>Alwaysdata</b>. (1GB RAM).
+  2. Only does editing .doc .docx .xsl
+  3. Realtime statistics.
+  4. Notification via <b>gmail</b>.
+  5. Next versions will be added new features.
+
+Good luck to me and ChatGPT! 
+&copy; CodeCraft Ltd; owner: Otabek Burhonov. 2025    Signature: <i>-_-Sign</i>

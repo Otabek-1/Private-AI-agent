@@ -1,151 +1,119 @@
+# Private-AI-Agent
 
-# 🧠 Private-AI-Agent
-
-**Private-AI-Agent** — bu sizga yordam beradigan AI bilan birlashtirilgan shaxsiy agent. Siz oddiy til orqali topshiriqlarni yozasiz va u ularni avtomatik bajaraydi — real vaqt statistikasi, xatoliklar haqida ogohlantirishlar, va fayl tahrirlash funksiyalari bilan.
-
----
-
-## 📌 Maqsad
-
-Yakka tartibdagi foydalanuvchilar va ish bilan band insonlar uchun zamonaviy, avtomatlashtirilgan va shaxsiy yordamchi yaratish. Asosiy maqsad — inson topshiriqlarini oddiy shaklda ifodalaydi, agent esa ularni bajaradi.
-
-> "Do‘stlaringiz sizga yordam berolmasa, sizga Private-AI-Agent yordam beradi." 😉
+**AI-integrated personal automation agent that does the digital work you ask for.**
 
 ---
 
-## 🚀 Asosiy imkoniyatlar (MVP)
+## 🧠 Description
 
-- ✍️ **Step-by-step** tasklar: Siz topshiriqlarni oddiy til bilan yozasiz
-- 📂 **Fayl tahrirlash**: `.doc`, `.docx`, `.xlsx` fayllarni avtomatik o‘qish va yozish
-- 📊 **Real-time statistika**: Qaysi ish bajarilmoqda, qancha qoldi, nechta muvaffaqiyatli yoki xatolik bo‘ldi
-- 📬 **Gmail orqali bildirishnoma**: Har bir muvaffaqiyat yoki xatolik haqida email orqali habar
-- 🌐 **VPS hosting**: Alwaysdata (1GB RAM VPS) da bepul joylashtirish
-- 🔐 **Login bo‘lmasdan ishlash** (MVP uchun): Minimal soddalik, foydalanuvchi nomi va topshiriq kifoya
+Private-AI-Agent is a smart assistant that receives tasks from you in natural language and executes them, mimicking how a person would operate on documents and data.
+
+It is focused on automating operations with `.doc`, `.docx`, and `.xlsx` files. You give it an instruction and the corresponding files — it will analyze them, fix if needed, and perform your task. All progress is shown to you in real-time.
 
 ---
 
-## 🛠 Texnologiyalar
+## 🛠 Technologies
 
-| Texnologiya    | Maqsadi                              |
-|----------------|----------------------------------------|
-| **Node.js**    | Backend va agent logikasini boshqaradi |
-| **React.js**   | Foydalanuvchi interfeysi (dashboard)   |
-| **Express.js** | REST API yaratish uchun                 |
-| **Multer**     | Fayl yuklash uchun                     |
-| **Docx4js / XLSX** | DOC/DOCX/Excel fayllarni tahrirlash |
-| **Nodemailer** | Gmail orqali email yuborish            |
-| **Socket.IO**  | Real-time statistikani ko‘rsatish       |
+* **Node.js** — for backend task processing and server logic
+* **ReactJS** — for frontend UI and real-time task monitoring
+* **Socket.io** — for real-time communication
+* **Multer** — for file uploads
+* **docx4js / mammoth** — for reading `.docx` documents
+* **xlsx** — for generating or editing Excel files
+* **iconv-lite** — for encoding detection and conversion
+* **LibreOffice (headless)** — for converting `.doc` to `.docx` when necessary
+
+> ⚠️ No Python-based tooling is used in the current version. The backend is entirely powered by Node.js and JavaScript.
 
 ---
 
-## 📦 Loyihaning struktura sxemasi
+## ⚙️ Core Features (MVP)
+
+### ✅ Natural Language Task Input
+
+You can give instructions like:
+
+```
+"Read names and scores from this docx file and write them in two rows in Excel."
+```
+
+### ✅ File Upload Interface
+
+Upload `.doc`, `.docx`, or `.xlsx` files along with your task.
+
+### ✅ File Preprocessing & Validation
+
+Every file goes through a rigorous validation pipeline:
+
+* Check if the format is supported (`docx`, `doc`, `xlsx`)
+* Check encoding (UTF-8 or Windows-1251)
+* Check for empty files
+* Analyze internal structure
+
+### ✅ Auto-fix when possible
+
+* `.doc` files are auto-converted to `.docx`
+* Non-UTF-8 encodings are auto-converted (e.g. Cyrillic in Windows-1251)
+* If auto-fix fails, the task fails gracefully with notification
+
+### ✅ Real-time Task Progress
+
+You see each stage of the task in real-time:
+
+* ✅ Task received
+* 🟡 Checking files...
+* ⚙️ Processing task...
+* ✅ Done (with download link)
+* ❌ If error, detailed reason shown
+
+### ✅ Dashboard Notification System
+
+All status updates and errors are pushed live to the frontend via sockets.
+
+---
+
+## 📦 Folder Structure (planned)
 
 ```
 private-ai-agent/
-├── client/               # React frontend
-│   └── src/
-│       └── components/
-├── server/               # Node.js backend
-│   ├── routes/
-│   ├── tasks/
-│   └── utils/
-├── uploads/              # Yuklangan fayllar
-├── README.md
-├── .env
-└── package.json
+├── client/           # React frontend
+├── server/           # Node.js backend
+│   ├── routes/       # API endpoints
+│   ├── sockets/      # Real-time logic
+│   ├── tasks/        # Task handlers (docx → xlsx etc)
+│   ├── utils/        # File checkers, encoders, etc
+│   └── uploads/      # Temporary uploaded files
+└── README.md
 ```
 
 ---
 
-## 💻 Ishlash prinsipi
+## 🚀 Future Plans (v2)
 
-1. Siz topshiriqni yozasiz:
-    ```text
-    1. docx fayldagi jadvaldagi ism va ballarni Excel faylga ikki qatorda joylashtir
-    2. Faylni gmailga yubor
-    ```
-2. Agent topshiriqni tabiatiga ko‘ra bajara boshlaydi:
-    - Faylni o‘qiydi
-    - Kerakli ma'lumotni ajratadi
-    - Excelga yozadi
-    - Natijani yuboradi
-3. Siz esa:
-    - Real-time holatni dashtbordda ko‘rasiz
-    - Email orqali bajarilganligi haqida bildirishnoma olasiz
+* Add support for **desktop-level automation** using Python (e.g., PyAutoGUI)
+* Visual on-screen agents that perform actions inside applications
+* Browser-based RPA features
+* Intelligent NLP interpreter for understanding more complex commands
 
 ---
 
-## 📥 Topshiriq formatlari (Task Prompt)
+## ✅ Example Task Workflow
 
-| Namuna | Tushuntirish |
-|--------|--------------|
-| `Upload "login123", "pass456" bilan akkauntga fayl` | Web login va upload qilish |
-| `Fayldan 3-sahifadagi jadvalni o‘qib, Excelga yoz`    | DOCX → XLS konvertatsiya |
-| `Statistika faylini och, ball >80 bo‘lganlarni alohida ajrat` | Shartli ajratish |
-
-> ⚠️ Kelajakda bu komandalar GPT yordamida avtomatik kodinga aylanadi!
-
----
-
-## 📈 Real-time monitoring
-
-- Har bir topshiriq uchun:
-  - ⏳ Boshlangan vaqt
-  - ✅ Bajarilganmi yoki yo‘q
-  - ⚠️ Xatolik tafsilotlari (agar bo‘lsa)
-- Web dashboard orqali kuzatish
+1. You upload a `.doc` file and write:
+   *"Extract student names and scores, and save to Excel"*
+2. Server detects `.doc` format → converts to `.docx`
+3. Reads Cyrillic text → encodes properly
+4. Extracts relevant data
+5. Generates Excel file
+6. Sends it back + shows progress live
 
 ---
 
-## 🔔 Gmail notifikatsiya
+## 👨‍💻 Owner
 
-Tizim tugallanganda yoki xatolik bo‘lsa:
-- 📬 Email yuboriladi: 
-    - `Subject: ✅ Task completed successfully!`
-    - `Subject: ❌ Task failed - Error: File not found`
+**CodeCraft Ltd**
 
----
+* Author: *Otabek Burhonov*
+* Signature: `-_-Sign`
 
-## 🧪 MVP rejasi
-
-- [x] DOCX → XLSX fayl konvertori
-- [x] Task queue (ketma-ket bajarish)
-- [x] Real-time stats (Socket.IO)
-- [x] Email notifications (Nodemailer)
-- [x] Alwaysdata VPS deploy
-
----
-
-## 🧱 Kelajakdagi rejalar
-
-- [ ] Web automation (login, upload, download)
-- [ ] Telegram/Slack bot interfeysi
-- [ ] GPT asosida topshiriqni kodga aylantirish
-- [ ] Faylni ovoz orqali topshiriq shaklida berish
-- [ ] Task xotirasi: tarixni saqlash va yana ishlatish
-
----
-
-## 🧠 Foydalanuvchi kimga kerak?
-
-- Ish bilan band freelancerlar
-- AI developerlar uchun test assistant
-- Studentlar uchun hujjat avtomatizatsiyasi
-- Shaxsiy yordamchi kerak bo‘lgan har bir kishi
-
----
-
-## 🧾 Lisensiya & Mualliflik
-
-- © 2025 CodeCraft Ltd  
-- Muallif: Otabek Burhonov  
-- Shaxsiy loyiha: motivatsiya, o‘rganish va real foyda beradigan agent qurish.
-
----
-
-## ✍️ So‘nggi so‘z
-
-> Bu loyiha menga va ChatGPT’ga omad olib kelsin!  
-> Sog'liq uchun !
-
-**2025 yil yozgi imzo:** `-_-Sign`  
+> “Built to make boring work disappear.”

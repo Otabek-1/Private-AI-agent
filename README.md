@@ -146,6 +146,6 @@ Tizim tugallanganda yoki xatolik bo‘lsa:
 ## ✍️ So‘nggi so‘z
 
 > Bu loyiha menga va ChatGPT’ga omad olib kelsin!  
-> "Ishlarimni sukutda qilaman, natijalarim shovqin qiladi."
+> Sog'liq uchun !
 
 **2025 yil yozgi imzo:** `-_-Sign`  
